@@ -5,7 +5,7 @@ singleTop：帧顶复用，判断栈顶是否是目标Activity，是直接复用
 singleTask：栈内复用，判断栈内是否有目标Activity，是直接复用调用onNewIntent，并且顶出在它之上的其他实例，否创建新实例入栈</br>
 singleInstance：独享模式，此Activity独享一个Activity栈
 ### singleInstance如果不指定栈名，是怎么分配的?
-使用taskAffinity可以指定栈名
+singleInstance是否指定栈名，效果是一样的，都是独享一个Activity栈。原因是因为singleInstance优先级更高（PS：使用taskAffinity可以指定栈名，但是只对singleTask和singleInstance有效，栈名不指定默认使用包名，只要指定栈名，singleTask也能达到独享栈的效果）
 
 ## 2.Android的类加载机制（快手）
 Java类加载机制：父类优化策略，即加载之前会先代理给自己的父类去加载，父类加载不到才自己加载</br>
