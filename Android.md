@@ -25,3 +25,16 @@ onResume/onPause：前后台周期</br>
 如果要销毁当前Activity，直接调用finish方法，最终调用AMS的finishActivity方法，finish方法的作用会将该Activity从栈内移除，并且回调onDestroy释放一些开发者需要释放的资源，最后系统
 负责把该Activity内存资源回收
 
+## 4.Intent显示跳转与隐式跳转，如何使用
+显式跳转：需要在intent中显式设置跳转的class对象。在清单文件中注册Activity</br>
+隐式跳转：需要在intent中设置Action（执行的动作，不设置就会随机进入一个设置了Action的Activity），或者Category（执行的环境）。在清单文件中注册Activity之外还需要设置Intent-filter的Action（必须设置，否则无法使用）和Category（至少一个，不特殊就设置默认的）
+
+## 5.Activity A跳转B，B跳转C，A不能直接跳转到C，A如何传递消息给C
+方案1：Handler方式，在基类中定义一个公共的handler，这样在C中使用该handler，A中也能接收处理</br>
+方案2：EventBus方式</br>
+方案3：Android广播方式</br>
+方案4：观察者模式实践
+
+## 6.Activity如何保存状态的
+Activity被回收有两种情况，一种是主动回收，这种情况一般没必要保存状态，另一种是被动回收，比如内存不足时，此情况可以重写onSaveInstanceState方法，将需要保存的数据存入bundle的，下次该Activity再次被创建时，onCreate方法中会带入数据，
+也可能重写onRestoreInstanceState处理保存数据。
