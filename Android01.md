@@ -1,4 +1,4 @@
-# Android基础
+# Android体系
 ## 1.Activity的启动模式（同Activity栈的问题）（Vivo，快手）
 standard：标准启动，Activity依次入栈</br>
 singleTop：帧顶复用，判断栈顶是否是目标Activity，是直接复用调用onNewIntent，否创建新实例入栈</br>
@@ -38,3 +38,7 @@ onResume/onPause：前后台周期</br>
 ## 6.Activity如何保存状态的
 Activity被回收有两种情况，一种是主动回收，这种情况一般没必要保存状态，另一种是被动回收，比如内存不足时，此情况可以重写onSaveInstanceState方法，将需要保存的数据存入bundle的，下次该Activity再次被创建时，onCreate方法中会带入数据，
 也可能重写onRestoreInstanceState处理保存数据。
+
+## 7.请描诉Activity的启动流程，从点击图标开始
+创建进程：Launcher进程->(Binder方式)system_server进程中的AMS->(Socket方式)Zogote孵化进程->(Socket方式)APP进程</br>
+启动过程：APP进程->(Binder方式)system_server进程中的AMS去attach Application->(Binder方式)App进程(ApplicationThread)->(Handler方式)ActivityThread->Activity.onCreate()
